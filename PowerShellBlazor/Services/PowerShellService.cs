@@ -37,7 +37,7 @@ namespace PowerShellBlazor.Services
 
         public event EventHandler<List<Message>> OutputChanged;
 
-        public async Task RunScript(string script)
+        public async Task RunScript(string script, string inputString)
         {
             string pscommand = Path.Combine(_WebHostEnvironment.ContentRootPath, "Scripts/" + script);
             if (!File.Exists(pscommand))
@@ -47,7 +47,7 @@ namespace PowerShellBlazor.Services
             else
             {
                 PowerShell shell = PowerShell.Create();
-                shell.AddCommand(pscommand);
+                shell.AddCommand(pscommand).AddParameter("UserName",inputString);
 
                 AddOutput(PSStream.Output, "<b>Executing: </b>" + shell.Commands.Commands[0].ToString());
                 AddOutput(PSStream.Output, "<b>BEGIN</b>");

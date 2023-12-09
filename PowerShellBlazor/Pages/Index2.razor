@@ -1,11 +1,11 @@
-@page "/"
+@page "/index2"
 @inject IPowerShellService PowerShellService
 <EditForm EditContext="@editContext" OnSubmit="RunScript">
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label for="Name" class="form-label">Script name (with .ps1; must exist in Scripts folder)</label>
+        <label for="Name" class="form-label">InputString</label>
         <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="script" required="required" />
+            <InputText class="form-control" @bind-Value="inputString" required="required" />
         </div>
     </div>
     <div class="form-group">
@@ -29,12 +29,15 @@
         editContext = new(script);
 
     }
-    protected string script { get; set; } = "";
+    protected string script { get; set; } = "testinput.ps1";
+    [Parameter]
+    public string inputString { get; set; } = "";
+
     protected void RunScript()
     {
         PowerShellService.Output = new();
         PowerShellService.OutputChanged += OutputChanged;
-        Task.Run(() => PowerShellService.RunScript(script));
+        Task.Run(() => PowerShellService.RunScript(script, inputString));
     }
 
     private void OutputChanged(object sender, List<Message> newOutput)
