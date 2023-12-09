@@ -19,6 +19,10 @@ Looks like this...
 
 ![Results](Results.gif)
 
+## Forked variant (by Rakhesh)
+
+Alternatively, you can hard code the script to run but take the input via a form. The script doesn't need to be hard coded, but I had that as a use case. If the script isn't hard coded then more logic is needed to get the appropriate input and I didn't want to go into all that. 
+
 ## Prerequisites
 
 * PowerShell scripts must be non-interactive; there's no means to provide input back to PowerShell scripts once they're running.
